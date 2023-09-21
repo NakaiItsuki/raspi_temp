@@ -1,1 +1,1 @@
-*/1 * * * * /usr/bin/python3 /src/bme280Test.py
+*/1 * * * * /usr/bin/python3 /var/bme280Test.py
