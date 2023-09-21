@@ -10,6 +10,8 @@ WORKDIR /sample_folder
 # GPIO, I2C, Serial (for Python3.x)
 RUN set -x &&\
     apt update &&\
+    apt install -y --no-install-recommends tzdata && \
+    ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
     apt install \
         python3 python3-rpi.gpio i2c-tools python3-smbus cu python3-pip -y
 # set bme280Test.py
@@ -25,7 +27,7 @@ RUN pip3 install PyMySQL
 
 run pip3 install cryptography 
 
-RUN timedatectl set-timezone Asia/Tokyo
+
 
 #コマンド実行
 CMD ["python3", "bme280Test.py"]

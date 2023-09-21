@@ -42,6 +42,7 @@ services:
     networks:
       backend:
         ipv4_address: 192.168.10.2
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --default-time-zone=Asia/Tokyo
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-u", "mysql", "-pmysql"]
       timeout: 20s
