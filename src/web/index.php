@@ -13,7 +13,7 @@
 
 <?php
 
-$link = mysql_connect('192.168.10.2', 'piuser', 'pi1qaz2wsx');
+$link = mysql_connect('192.168.10.2', 'piuser', 'Pi1qaz2wsx');
 if (!$link) {
     die('接続失敗です。'.mysql_error());
 }
