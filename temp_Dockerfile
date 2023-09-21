@@ -10,7 +10,7 @@ WORKDIR /var
 RUN set -x &&\
     apt update &&\
     apt install \
-        python3-rpi.gpio i2c-tools python3-smbus cu cron python3-pip -y
+        python3-rpi.gpio i2c-tools python3-smbus cu python3-pip -y
 # set bme280Test.py
 COPY ./src/bme280/bme280Test.py /var/
 
@@ -21,6 +21,3 @@ RUN pip3 install smbus2
 
 # install Pymysql
 RUN pip3 install PyMySQL
-
-# cron設定を配置する
-COPY ./docker/cron/cron.root /etc/cron.d/cron
