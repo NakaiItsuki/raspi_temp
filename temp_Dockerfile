@@ -3,7 +3,7 @@
 FROM ubuntu
 
 # Set default work directory
-WORKDIR /var
+WORKDIR /
 
 # install packages
 # GPIO, I2C, Serial (for Python3.x)
