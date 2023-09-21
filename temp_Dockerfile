@@ -25,9 +25,7 @@ RUN pip3 install smbus2
 # install Pymysql
 RUN pip3 install PyMySQL
 
-run pip3 install cryptography 
-
-
+RUN pip3 install cryptography 
 
 #コマンド実行
 CMD ["python3", "bme280Test.py"]
