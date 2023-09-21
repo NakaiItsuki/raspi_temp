@@ -37,10 +37,14 @@ $humis = array_column($data, 'humi');
 $press = array_column($data, 'pres');
 ?>
 <script>
-    var dates = <?php echo $dates; ?>
-    var temps = <?php echo $temps; ?>
-    var humis = <?php echo $humis; ?>
-    var press = <?php echo $press; ?>
+    var dates = [];
+    var temps = [];
+    var humis = [];
+    var press = [];
+    dates = <?php echo $dates; ?>
+    temps = <?php echo $temps; ?>
+    humis = <?php echo $humis; ?>
+    press = <?php echo $press; ?>
     console.log(dates);
     $("#d_temp").html(temps[0]);
     $("#d_humi").html(humis[0]);
