@@ -1,0 +1,12 @@
+# MYSQL
+# image
+FROM mysql
+
+# set mysql
+ENV MYSQL_ROOT_PASSWORD root1qaz2wsx
+ENV MYSQL_DATABASE Temp
+ENV MYSQL_USER piuser
+ENV MYSQL_PASSWORD pi1qaz2wsx
+
+# copy mysql setting
+COPY ./docker/mysql/mysql.conf /etc/mysql/conf.d/my.cnf
