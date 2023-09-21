@@ -18,25 +18,20 @@ $temps = array();
 $humis = array();
 $press = array();
 
+
 try {
-  // MariaDB接続
-$pdo = new PDO (
-    'mysql:host=192.168.10.2;dbname=temp;charset=utf8mb4','piuser','Pi1qaz2wsx',
-    [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    ]
-);
-$stmt = $pdo->query("SELECT date, temp, humi, pres from thp");
-while ($row = $stmt->fetch()) {
-    $dates = $row['date'];
-    $temps = $row['temp'];
-    $humis = $row['humi'];
-    $press = $row['pres'];
-}
-// MariaDB切断
-$pdo = null;
-// エラー処理
+    $pdo = new PDO (
+        'mysql:host=192.168.10.2;dbname=temp;charset=utf8mb4','piuser','Pi1qaz2wsx',
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        ]
+    );
+    $stmt = $pdo->query("SELECT date, temp, humi, pres from thp");
+    while ($row = $stmt->fetch()) {
+        print "$row[date], $row[temp], $row[humi], $row[pres] <br> \n";
+    }
+    $pdo = null;
 } catch (PDOException $e) {
     echo $e->getMessage() . PHP_EOL;
     exit;
