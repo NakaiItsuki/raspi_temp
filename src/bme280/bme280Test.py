@@ -137,6 +137,7 @@ def setup():
 
 def main():
     while True:
+        time.sleep(30)
         setup()
         get_calib_param()
         stemp,spres,shumi=readData()
