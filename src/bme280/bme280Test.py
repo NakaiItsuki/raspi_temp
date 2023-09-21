@@ -3,7 +3,7 @@
 from smbus2 import SMBus
 import time
 import json
-import datetime
+from datetime import datetime
 import pymysql
 
 bus_number=1
@@ -141,7 +141,7 @@ def main():
         setup()
         get_calib_param()
         stemp,spres,shumi=readData()
-        sdt_now=datetime.datetime.now()
+        sdt_now=datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
         #print("temp(c)={:6.2f}".format(temp),"| ",end="")
         #print("pres(hPa)={:7.2f}".format(pres),"| ",end="")
         #print("humi(%)={:6.2f}".format(humi),"| ",end="")
@@ -159,7 +159,7 @@ def main():
         try:
             with connection.cursor() as cursor:
                 sql = "INSERT INTO thp (date, temp, humi, pres) VALUES (%s,%s,%s,%s);"
-                cursor.execute(sql,(stemp,shumi,spres,sdt_now))
+                cursor.execute(sql,(sdt_now,stemp,shumi,spres))
                 connection.commit()
         finally:
             connection.close()
