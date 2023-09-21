@@ -12,7 +12,6 @@ services:
       context: .
       dockerfile: ./web_Dockerfile
     depends_on:
-      - db
       - app
     ports:
       - 9080:80
@@ -27,7 +26,8 @@ services:
       context: .
       dockerfile: ./temp_Dockerfile
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     devices:
       - "/dev/i2c-1"
       - "/dev/gpiomem"
@@ -42,6 +42,10 @@ services:
     networks:
       backend:
         ipv4_address: 192.168.10.2
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-u", "mysql", "-pmysql"]
+      timeout: 20s
+      retries: 10
 
 volumes:
   db-data:
