@@ -13,6 +13,10 @@
 </head>
 <body>
 <?
+$dates = array();
+$temps = array();
+$humis = array();
+$press = array();
 try {
   // MariaDB接続
 $pdo = new PDO (
@@ -23,7 +27,12 @@ $pdo = new PDO (
     ]
 );
 $stmt = $pdo->query("SELECT date, temp, humi, pres from thp");
-$data = $stmt->fetchAll();
+while ($row = mysql_fetch_assoc($stmt)) {
+    $dates = $row['date'];
+    $temps = $row['temp'];
+    $humis = $row['humi'];
+    $press = $row['pres'];
+}
 // MariaDB切断
 $pdo = null;
 // エラー処理
@@ -31,10 +40,6 @@ $pdo = null;
     echo $e->getMessage() . PHP_EOL;
     exit;
 }
-$dates = array_column($data, 'date');
-$temps = array_column($data, 'temp');
-$humis = array_column($data, 'humi');
-$press = array_column($data, 'pres');
 ?>
 <script>
     var dates = [];
