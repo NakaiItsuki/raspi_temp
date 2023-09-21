@@ -21,3 +21,6 @@ RUN pip3 install smbus2
 
 # install Pymysql
 RUN pip3 install PyMySQL
+
+#コマンド実行
+CMD ["python", "bme280Test.py"]
