@@ -41,6 +41,7 @@ $press = array_column($data, 'pres');
     var temps = <?php echo $temps; ?>
     var humis = <?php echo $humis; ?>
     var press = <?php echo $press; ?>
+    console.log(dates);
     $("#d_temp").html(temps[0]);
     $("#d_humi").html(humis[0]);
     $("#d_pres").html(press[0]);
