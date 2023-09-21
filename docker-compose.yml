@@ -1,0 +1,41 @@
+version: "3.6"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: ./web_Dockerfile
+    ports:
+      - 9080:80
+    networks:
+      backend:
+        ipv4_address: 192.168.10.4
+    volumes:
+      - ./doc_root/public:/var/www/sample-app/public
+
+  app:
+    build:
+      context: .
+      dockerfile: ./temp_Dockerfile
+    networks:
+      backend:
+        ipv4_address: 192.168.10.3
+
+  db:
+    build:
+      context: .
+      dockerfile: ./mysql_Dockerfile
+    ports:
+      - ${DB_PORT:-3306}:3306
+    networks:
+      backend:
+        ipv4_address: 192.168.10.2
+networks:
+  backend:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.10.0/24
+volumes:
+  db-data:
+    driver: local
