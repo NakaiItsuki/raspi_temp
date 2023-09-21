@@ -23,9 +23,7 @@ $pdo = new PDO (
     ]
 );
 $stmt = $pdo->query("SELECT date, temp, humi, pres from thp");
-while ($row = $stmt->fetch()) {
-    $datas[] = $row;
-}
+$data = $stmt->fetchAll();
 // MariaDB切断
 $pdo = null;
 // エラー処理
@@ -33,12 +31,10 @@ $pdo = null;
     echo $e->getMessage() . PHP_EOL;
     exit;
 }
-for ($i = 0; $i < count($datas); $i++) {
-    $dates=$datas[$i][0]
-    $temps=$datas[$i][1]
-    $humis=$datas[$i][2]
-    $press=$datas[$i][3]
-}
+$dates = array_column($data, 'date');
+$temps = array_column($data, 'temp');
+$humis = array_column($data, 'humi');
+$press = array_column($data, 'pres');
 ?>
 <script>
     var dates = <?php echo $dates; ?>
