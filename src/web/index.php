@@ -14,7 +14,7 @@
 try {
   // MariaDB接続
 $pdo = new PDO (
-  'mysql:host=192.168.10.2;dbname=temp;charset=utf8mb4','piuser','Pi1qaz2wsx',
+  'mysql:host=app-db;dbname=temp;charset=utf8mb4','piuser','Pi1qaz2wsx',
   [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
