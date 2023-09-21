@@ -11,7 +11,7 @@ WORKDIR /src
 RUN set -x &&\
     apt update &&\
     apt install \
-        python3-rpi.gpio i2c-tools python3-smbus cu cron -y
+        python3-rpi.gpio i2c-tools python3-smbus cu cron python3-pip -y
 # set bme280Test.py
 COPY ./src/bme280/bme280Test.py /src/
 
