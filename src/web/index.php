@@ -18,25 +18,33 @@ $temps = array();
 $humis = array();
 $press = array();
 
+$mysqli = new mysqli("192.168.10.2","piuser","Pi1qaz2wsx","temp");
 
-try {
-    $pdo = new PDO (
-        'mysql:host=192.168.10.2;dbname=temp;charset=utf8mb4','piuser','Pi1qaz2wsx',
-        [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        ]
-    );
-    $stmt = $pdo->query("SELECT date, temp, humi, pres from thp");
-    while ($row = $stmt->fetch()) {
-        print "$row[date], $row[temp], $row[humi], $row[pres] <br> \n";
-    }
-    $pdo = null;
-} catch (PDOException $e) {
-    echo $e->getMessage() . PHP_EOL;
-    exit;
+if ($mysqli -> connect_errno) {
+  echo "Failed to connect to MySQL: " . $mysqli -> connect_error;
+  exit();
 }
+
+$sql = "SELECT date, temp, humi, pres FROM thp";
+$result = $mysqli -> query($sql);
+
+// Numeric array
+//$row = $result -> fetch_array(MYSQLI_NUM);
+//printf ("%s (%s)\n", $row[0], $row[1]);
+
+// Associative array
+$row = $result -> fetch_array(MYSQLI_ASSOC);
+//printf ("%s (%s)\n", $row["date"], $row["temp"]);
+$dates = $row["date"];
+$temps = $row["temp"];
+$humis = $row["humi"];
+$press = $row["pres"];
+// Free result set
+$result -> free_result();
+
+$mysqli -> close();
 ?>
+
 
 <script>
     var dates = [];
