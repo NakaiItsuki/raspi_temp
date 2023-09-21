@@ -10,3 +10,4 @@ ENV MYSQL_PASSWORD pi1qaz2wsx
 
 # copy mysql setting
 COPY ./docker/mysql/mysql.conf /etc/mysql/conf.d/my.cnf
+COPY ./docker/mysql/initdb.d /docker-entrypoint-initdb.d
