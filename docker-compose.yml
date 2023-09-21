@@ -16,6 +16,9 @@ services:
     build:
       context: .
       dockerfile: ./temp_Dockerfile
+    device:
+      - "/dev/i2c-1"
+      - "/dev/gpiomem"
     networks:
       backend:
         ipv4_address: 192.168.10.3
