@@ -11,6 +11,9 @@ services:
     build:
       context: .
       dockerfile: ./web_Dockerfile
+    depends_on:
+      - db
+      - app
     ports:
       - 9080:80
     networks:
@@ -23,6 +26,8 @@ services:
     build:
       context: .
       dockerfile: ./temp_Dockerfile
+    depends_on:
+      - db
     devices:
       - "/dev/i2c-1"
       - "/dev/gpiomem"
