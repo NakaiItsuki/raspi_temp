@@ -2,26 +2,26 @@
 # image
 FROM ubuntu
 
-# Set default work directory
-RUN mkdir sample_folder
-WORKDIR /sample_folder
+# # Set default work directory
+# RUN mkdir sample_folder
+# WORKDIR /sample_folder
 
-# install packages
-# GPIO, I2C, Serial (for Python3.x)
-RUN set -x &&\
-    apt update &&\
-    apt install \
-        python3-rpi.gpio i2c-tools python3-smbus cu python3-pip -y
-# set bme280Test.py
-COPY ./src/bme280/bme280Test.py /sample_folder/
+# # install packages
+# # GPIO, I2C, Serial (for Python3.x)
+# RUN set -x &&\
+#     apt update &&\
+#     apt install \
+#         python3-rpi.gpio i2c-tools python3-smbus cu python3-pip -y
+# # set bme280Test.py
+# COPY ./src/bme280/bme280Test.py /sample_folder/
 
-RUN pip3 install --upgrade pip
+# RUN pip3 install --upgrade pip
 
-# install smbus2
-RUN pip3 install smbus2
+# # install smbus2
+# RUN pip3 install smbus2
 
-# install Pymysql
-RUN pip3 install PyMySQL
+# # install Pymysql
+# RUN pip3 install PyMySQL
 
 #コマンド実行
 #CMD ["python3", "bme280Test.py"]
