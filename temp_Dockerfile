@@ -12,7 +12,7 @@ RUN set -x &&\
     apt install \
         python3-rpi.gpio i2c-tools python3-smbus cu python3-pip -y
 # set bme280Test.py
-COPY ./src/bme280/bme280Test.py /var/
+COPY ./src/bme280/bme280Test.py ./
 
 RUN pip3 install --upgrade pip
 
