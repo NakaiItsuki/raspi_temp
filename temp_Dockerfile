@@ -19,5 +19,9 @@ RUN pip3 install --upgrade pip
 
 # install smbus2
 RUN pip3 install smbus2
+
+# install Pymysql
+RUN pip3 install PyMySQL
+
 # cron設定を配置する
 COPY ./docker/cron/cron.root /etc/cron.d/cron

@@ -4,6 +4,7 @@ from smbus2 import SMBus
 import time
 import json
 import datetime
+import pymysql
 
 bus_number=1
 i2c_address=0x76
@@ -137,27 +138,29 @@ def setup():
 def main():
     setup()
     get_calib_param()
-
+    stemp,spres,shumi=readData()
+    sdt_now=datetime.datetime.now()
+    #print("temp(c)={:6.2f}".format(temp),"| ",end="")
+    #print("pres(hPa)={:7.2f}".format(pres),"| ",end="")
+    #print("humi(%)={:6.2f}".format(humi),"| ",end="")
+    # dict={
+    #     "temp":temp,
+    #     "pres":pres,
+    #     "humi":humi,
+    #     "time":dt_now,
+    # }
+    # path='/var/www/html/temp_humi_pres/date.json'
+    # json_file=open(path,mode="w")
+    # json.dump(dict,json_file,indent=2,ensure_ascii=False,default=str)
+    # json_file.close()
+    connection = pymysql.connect(host='192.168.10.2', port=3306, user='piuser', password='Pi1qaz2wsx', db='temp')
     try:
-        while True:
-            temp,pres,humi=readData()
-            dt_now=datetime.datetime.now()
-            #print("temp(c)={:6.2f}".format(temp),"| ",end="")
-            #print("pres(hPa)={:7.2f}".format(pres),"| ",end="")
-            #print("humi(%)={:6.2f}".format(humi),"| ",end="")
-            dict={
-                "temp":temp,
-                "pres":pres,
-                "humi":humi,
-                "time":dt_now,
-            }
-            path='/var/www/html/temp_humi_pres/date.json'
-            json_file=open(path,mode="w")
-            json.dump(dict,json_file,indent=2,ensure_ascii=False,default=str)
-            json_file.close()
-            time.sleep(10)
-    except KeyboardInterrupt:
-        pass
+        with connection.cursor() as cursor:
+            sql = "INSERT INTO thp (date, temp, humi, pres) VALUES (%s,%s,%s,%s);"
+            cursor.execute(sql,(stemp,shumi,spres,sdt_now))
+            connection.commit()
+    finally:
+        connection.close()
 
 if __name__=='__main__':
     main()
