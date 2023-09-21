@@ -10,43 +10,27 @@
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-
-<?php
-
-$link = mysql_connect('192.168.10.2', 'piuser', 'Pi1qaz2wsx');
-if (!$link) {
-    die('接続失敗です。'.mysql_error());
+<?
+try {
+  // MariaDB接続
+$pdo = new PDO (
+  'mysql:host=192.168.10.2;dbname=temp;charset=utf8mb4','piuser','Pi1qaz2wsx',
+  [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+  ]
+);
+$stmt = $pdo->query("SELECT date, temp, humi from thp");
+while ($row = $stmt->fetch()) {
+  print "$row[date], $row[temp], $row[humi] <br> \n";
 }
-
-print('<p>接続に成功しました。</p>');
-
-$db_selected = mysql_select_db('Temp', $link);
-if (!$db_selected){
-    die('データベース選択失敗です。'.mysql_error());
+// MariaDB切断
+$pdo = null;
+// エラー処理
+} catch (PDOException $e) {
+  echo $e->getMessage() . PHP_EOL;
+  exit;
 }
-
-print('<p>uriageデータベースを選択しました。</p>');
-
-mysql_set_charset('utf8');
-
-$result = mysql_query('SELECT id,name FROM shouhin');
-if (!$result) {
-    die('クエリーが失敗しました。'.mysql_error());
-}
-
-while ($row = mysql_fetch_assoc($result)) {
-    print('<p>');
-    print('id='.$row['id']);
-    print(',name='.$row['name']);
-    print('</p>');
-}
-
-$close_flag = mysql_close($link);
-
-if ($close_flag){
-    print('<p>切断に成功しました。</p>');
-}
-
 ?>
 </body>
 </html>
