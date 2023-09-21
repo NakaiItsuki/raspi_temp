@@ -66,9 +66,9 @@ $json = json_encode($tempData);
     console.log(dates);
     console.log(dates[0]);
     console.log(temps[0]);
-    $("#d_temp").html(temps[0]);
-    $("#d_humi").html(humis[0]);
-    $("#d_pres").html(press[0]);
+    $("#d_temp").append(temps[0]);
+    $("#d_humi").append(humis[0]);
+    $("#d_pres").append(press[0]);
 </script>
 <h1>BME280 温度・湿度・気圧</h1>
 <h2>現在の情報</h2>
