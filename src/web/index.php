@@ -18,23 +18,28 @@ $temps = array();
 $humis = array();
 $press = array();
 
-$mysqli = new mysqli("192.168.10.2","piuser","Pi1qaz2wsx","temp");
-
-if ($mysqli -> connect_errno) {
-  echo "Failed to connect to MySQL: " . $mysqli -> connect_error;
-  exit();
+define('DSN','mysql:host=192.168.10.2;dbname=temp');
+define('DB_USER','piuser');
+define('DB_PASSWORD','Pi1qaz2wsx');
+error_reporting(E_ALL & ~E_NOTICE);
+function connectDb(){
+    try {
+        return new PDO(DSN, DB_USER, DB_PASSWORD);
+    }catch(PDOException $e){
+        echo $e->getMessage();
+        exit;
+    }
 }
+mb_language("uni");
+mb_internal_encoding("utf-8");
+mb_http_input("auto");
+mb_http_output("utf-8");
+$dbh = connectDb();
+$sth = $dbh->prepare("SELECT * FROM thp");
+$sth->execute();
+$userData=array();
 
-$sql = "SELECT date, temp, humi, pres FROM thp";
-$result = $mysqli -> query($sql);
-
-// Numeric array
-//$row = $result -> fetch_array(MYSQLI_NUM);
-//printf ("%s (%s)\n", $row[0], $row[1]);
-
-// Associative array
-$row = $result -> fetch_array(MYSQLI_ASSOC);
-while($row=$result->fetch(PDO::FETCH_ASSOC)){ //結果を配列で取得
+while($row=$sth->fetch(PDO::FETCH_ASSOC)){
     $tempData[]=array(
         'date'=>$row['date'],
         'temp'=>$row['temp'],
@@ -43,7 +48,6 @@ while($row=$result->fetch(PDO::FETCH_ASSOC)){ //結果を配列で取得
     );
 }
 $json = json_encode($tempData);
-// Free result set
 $result -> free_result();
 
 $mysqli -> close();
