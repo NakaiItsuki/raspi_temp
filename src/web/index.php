@@ -34,7 +34,7 @@ $result = $mysqli -> query($sql);
 
 // Associative array
 $row = $result -> fetch_array(MYSQLI_ASSOC);
-//printf ("%s (%s)\n", $row["date"], $row["temp"]);
+printf ("%s (%s)\n", $row["date"], $row["temp"]);
 $dates = $row["date"];
 $temps = $row["temp"];
 $humis = $row["humi"];
