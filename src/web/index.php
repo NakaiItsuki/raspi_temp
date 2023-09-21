@@ -48,9 +48,6 @@ while($row=$sth->fetch(PDO::FETCH_ASSOC)){
     );
 }
 $json = json_encode($tempData);
-$result -> free_result();
-
-$mysqli -> close();
 ?>
 
 
