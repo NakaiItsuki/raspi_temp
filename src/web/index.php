@@ -24,10 +24,7 @@ $pdo = new PDO (
 );
 $stmt = $pdo->query("SELECT date, temp, humi, pres from thp");
 while ($row = $stmt->fetch()) {
-    $dates[] = $row[date];
-    $temps[] = $row[temp];
-    $humis[] = $row[humi];
-    $press[] = $row[pres];
+    $datas[] = $row;
 }
 // MariaDB切断
 $pdo = null;
@@ -35,6 +32,12 @@ $pdo = null;
 } catch (PDOException $e) {
     echo $e->getMessage() . PHP_EOL;
     exit;
+}
+for ($i = 0; $i < count($datas); $i++) {
+    $dates=$datas[$i][0]
+    $temps=$datas[$i][1]
+    $humis=$datas[$i][2]
+    $press=$datas[$i][3]
 }
 ?>
 <script>
