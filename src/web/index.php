@@ -18,34 +18,31 @@ $temps = array();
 $humis = array();
 $press = array();
 
-$link = mysql_connect('192.168.10.2', 'piuser', 'Pi1qaz2wsx');
-if (!$link) {
-    die('接続失敗です。'.mysql_error());
-}
-
-$db_selected = mysql_select_db('uriage', $link);
-if (!$db_selected){
-    die('データベース選択失敗です。'.mysql_error());
-}
-
-
-mysql_set_charset('utf8');
-
-$result = mysql_query('SELECT date, temp, humi, pres from thp');
-if (!$result) {
-    die('クエリーが失敗しました。'.mysql_error());
-}
-
-while ($row = mysql_fetch_assoc($result)) {
+try {
+  // MariaDB接続
+$pdo = new PDO (
+    'mysql:host=192.168.10.2;dbname=temp;charset=utf8mb4','piuser','Pi1qaz2wsx',
+    [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    ]
+);
+$stmt = $pdo->query("SELECT date, temp, humi, pres from thp");
+while ($row = $stmt->fetch()) {
     $dates = $row['date'];
     $temps = $row['temp'];
     $humis = $row['humi'];
     $press = $row['pres'];
 }
-
-$close_flag = mysql_close($link);
-
+// MariaDB切断
+$pdo = null;
+// エラー処理
+} catch (PDOException $e) {
+    echo $e->getMessage() . PHP_EOL;
+    exit;
+}
 ?>
+
 <script>
     var dates = [];
     var temps = [];
