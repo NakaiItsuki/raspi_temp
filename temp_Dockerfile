@@ -1,6 +1,6 @@
 # GET TEMP AND HUMI AND PRES
 # image
-FROM ubuntu
+FROM ubuntu:latest
 
 # # Set default work directory
 # RUN mkdir sample_folder
