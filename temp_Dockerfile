@@ -25,8 +25,7 @@ RUN pip3 install PyMySQL
 
 run pip3 install cryptography 
 
-RUN apt-get install -y tzdata && \ 
-    ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+RUN timedatectl set-timezone Asia/Tokyo
 
 #コマンド実行
 CMD ["python3", "bme280Test.py"]
