@@ -64,6 +64,8 @@ $json = json_encode($tempData);
         press.push(elm['pres']);
     })
     console.log(dates);
+    console.log(dates[0]);
+    console.log(temps[0]);
     $("#d_temp").html(temps[0]);
     $("#d_humi").html(humis[0]);
     $("#d_pres").html(press[0]);
