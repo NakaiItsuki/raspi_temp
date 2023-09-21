@@ -20,9 +20,9 @@ $pdo = new PDO (
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
   ]
 );
-$stmt = $pdo->query("SELECT date, temp, humi from thp");
+$stmt = $pdo->query("SELECT date, temp, humi, pres from thp");
 while ($row = $stmt->fetch()) {
-  print "$row[date], $row[temp], $row[humi] <br> \n";
+  print "$row[date], $row[temp], $row[humi], $row[pres] <br> \n";
 }
 // MariaDB切断
 $pdo = null;
