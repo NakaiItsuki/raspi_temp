@@ -34,11 +34,15 @@ $result = $mysqli -> query($sql);
 
 // Associative array
 $row = $result -> fetch_array(MYSQLI_ASSOC);
-printf ("%s (%s)\n", $row["date"], $row["temp"]);
-$dates = $row["date"];
-$temps = $row["temp"];
-$humis = $row["humi"];
-$press = $row["pres"];
+while($row=$result->fetch(PDO::FETCH_ASSOC)){ //結果を配列で取得
+    $tempData[]=array(
+        'date'=>$row['date'],
+        'temp'=>$row['temp'],
+        'humi'=>$row['humi'],
+        'pres'=>$row['pres']
+    );
+}
+$json = json_encode($tempData);
 // Free result set
 $result -> free_result();
 
@@ -47,14 +51,17 @@ $mysqli -> close();
 
 
 <script>
+    var array = <?php echo $json; ?>;
     var dates = [];
     var temps = [];
     var humis = [];
     var press = [];
-    dates = <?php echo $dates; ?>
-    temps = <?php echo $temps; ?>
-    humis = <?php echo $humis; ?>
-    press = <?php echo $press; ?>
+    array.forEach(elm => {
+        dates.push(elm['date']);
+        temps.push(elm['temp']);
+        humis.push(elm['humi']);
+        press.push(elm['pres']);
+    })
     console.log(dates);
     $("#d_temp").html(temps[0]);
     $("#d_humi").html(humis[0]);
