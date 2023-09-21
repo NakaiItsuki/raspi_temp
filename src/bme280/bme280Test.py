@@ -155,7 +155,7 @@ def main():
         # json_file=open(path,mode="w")
         # json.dump(dict,json_file,indent=2,ensure_ascii=False,default=str)
         # json_file.close()
-        connection = pymysql.connect(host='app-db', port=3306, user='piuser', password='Pi1qaz2wsx', db='temp')
+        connection = pymysql.connect(host='192.168.10.2', port=3306, user='piuser', password='Pi1qaz2wsx', db='temp')
         try:
             with connection.cursor() as cursor:
                 sql = "INSERT INTO thp (date, temp, humi, pres) VALUES (%s,%s,%s,%s);"

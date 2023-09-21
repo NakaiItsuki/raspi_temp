@@ -1,22 +1,25 @@
 version: "3.6"
 networks:
-    sample-network:
-        external: true
+  backend:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.10.0/24
 services:
   web:
-    hostname: app-web
     build:
       context: .
       dockerfile: ./web_Dockerfile
     ports:
       - 9080:80
     networks:
-      - sample-network
+      backend:
+        ipv4_address: 192.168.10.4
     volumes:
       - ./doc_root/public:/var/www/sample-app/public
 
   app:
-    hostname: app-temp
     build:
       context: .
       dockerfile: ./temp_Dockerfile
@@ -24,15 +27,16 @@ services:
       - "/dev/i2c-1"
       - "/dev/gpiomem"
     networks:
-      - sample-network
+      backend:
+        ipv4_address: 192.168.10.3
 
   db:
-    hostname: app-db
     build:
       context: .
       dockerfile: ./mysql_Dockerfile
     networks:
-      - sample-network
+      backend:
+        ipv4_address: 192.168.10.2
 
 volumes:
   db-data:
