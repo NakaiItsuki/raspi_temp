@@ -171,7 +171,7 @@ $json = json_encode($tempData);
                 {
                 label: '気圧(hPa）',
                 data: press,
-                borderColor: "rgba(255,0,0,1)",
+                borderColor: "rgba(0,0,255,1)",
                 backgroundColor: "rgba(0,0,0,0)"
                 }
             ],
