@@ -36,7 +36,7 @@ mb_internal_encoding("utf-8");
 mb_http_input("auto");
 mb_http_output("utf-8");
 $dbh = connectDb();
-$sth = $dbh->prepare("SELECT * FROM thp");
+$sth = $dbh->prepare("SELECT * FROM thp ORDER BY `LastUpdate` LIMIT 50");
 $sth->execute();
 $userData=array();
 
