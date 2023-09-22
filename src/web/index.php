@@ -50,8 +50,16 @@ while($row=$sth->fetch(PDO::FETCH_ASSOC)){
 }
 $json = json_encode($tempData);
 ?>
-
-
+<h1>BME280 温度・湿度・気圧</h1>
+<h2>現在の情報</h2>
+<h3>温度</h3>
+<p class="data" id="d_temp"></p>
+<h3>湿度</h3>
+<p class="data" id="d_humi"></p>
+<h3>気圧</h3>
+<p class="data" id="d_pres"></p>
+<h2>温度グラフ</h2>
+<canvas id="myLineChart"></canvas>
 <script>
     $(function(){
         var array = <?php echo $json; ?>;
@@ -71,15 +79,41 @@ $json = json_encode($tempData);
         $("#d_temp").append(temps[0]);
         $("#d_humi").append(humis[0]);
         $("#d_pres").append(press[0]);
+        var ctx = document.getElementById("myLineChart");
+        var myLineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+            labels: dates,
+            datasets: [
+                {
+                label: '気温(度）',
+                data: temps,
+                borderColor: "rgba(255,0,0,1)",
+                backgroundColor: "rgba(0,0,0,0)"
+                }
+            ],
+            },
+            options: {
+            title: {
+                display: true,
+                text: '室温'
+            },
+            scales: {
+                yAxes: [{
+                ticks: {
+                    suggestedMax: 40,
+                    suggestedMin: 0,
+                    stepSize: 10,
+                    callback: function(value, index, values){
+                    return  value +  '度'
+                    }
+                }
+                }]
+            },
+            }
+        });
     });
 </script>
-<h1>BME280 温度・湿度・気圧</h1>
-<h2>現在の情報</h2>
-<h3>温度</h3>
-<p class="data" id="d_temp"></p>
-<h3>湿度</h3>
-<p class="data" id="d_humi"></p>
-<h3>気圧</h3>
-<p class="data" id="d_pres"></p>
+
 </body>
 </html>
