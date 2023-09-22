@@ -59,7 +59,17 @@ $json = json_encode($tempData);
 <h3>気圧</h3>
 <p class="data" id="d_pres"></p>
 <h2>温度グラフ</h2>
-<canvas id="myLineChart"></canvas>
+<div class="canvas-container">
+    <canvas id="myLineChart1"></canvas>
+</div>
+<h2>湿度グラフ</h2>
+<div class="canvas-container">
+    <canvas id="myLineChart2"></canvas>
+</div>
+<h2>気圧グラフ</h2>
+<div class="canvas-container">
+    <canvas id="myLineChart3"></canvas>
+</div>
 <script>
     $(function(){
         var array = <?php echo $json; ?>;
@@ -79,8 +89,16 @@ $json = json_encode($tempData);
         $("#d_temp").append(temps[0]);
         $("#d_humi").append(humis[0]);
         $("#d_pres").append(press[0]);
-        var ctx = document.getElementById("myLineChart");
-        var myLineChart = new Chart(ctx, {
+        var ctx1 = document.getElementById("myLineChart1");
+        ctx1.attr('width', container.width());
+        ctx1.attr('height', 300);
+        var ctx2 = document.getElementById("myLineChart2");
+        ctx2.attr('width', container.width());
+        ctx2.attr('height', 300);
+        var ctx3 = document.getElementById("myLineChart3");
+        ctx3.attr('width', container.width());
+        ctx3.attr('height', 300);
+        var myLineChart1 = new Chart(ctx1, {
             type: 'line',
             data: {
             labels: dates,
@@ -106,6 +124,70 @@ $json = json_encode($tempData);
                     stepSize: 10,
                     callback: function(value, index, values){
                     return  value +  '度'
+                    }
+                }
+                }]
+            },
+            }
+        });
+        var myLineChart2 = new Chart(ctx2, {
+            type: 'line',
+            data: {
+            labels: dates,
+            datasets: [
+                {
+                label: '湿温(%）',
+                data: humis,
+                borderColor: "rgba(0,255,0,1)",
+                backgroundColor: "rgba(0,0,0,0)"
+                }
+            ],
+            },
+            options: {
+            title: {
+                display: true,
+                text: '湿度'
+            },
+            scales: {
+                yAxes: [{
+                ticks: {
+                    suggestedMax: 40,
+                    suggestedMin: 0,
+                    stepSize: 10,
+                    callback: function(value, index, values){
+                    return  value +  '%'
+                    }
+                }
+                }]
+            },
+            }
+        });
+        var myLineChart3 = new Chart(ctx3, {
+            type: 'line',
+            data: {
+            labels: dates,
+            datasets: [
+                {
+                label: '気圧(hPa）',
+                data: press,
+                borderColor: "rgba(255,0,0,1)",
+                backgroundColor: "rgba(0,0,0,0)"
+                }
+            ],
+            },
+            options: {
+            title: {
+                display: true,
+                text: '気圧'
+            },
+            scales: {
+                yAxes: [{
+                ticks: {
+                    suggestedMax: 40,
+                    suggestedMin: 0,
+                    stepSize: 10,
+                    callback: function(value, index, values){
+                    return  value +  'hPa'
                     }
                 }
                 }]
