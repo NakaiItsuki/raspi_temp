@@ -89,6 +89,7 @@ $json = json_encode($tempData);
         $("#d_temp").append(temps[0]);
         $("#d_humi").append(humis[0]);
         $("#d_pres").append(press[0]);
+        var container = $('.canvas-container');
         var ctx1 = document.getElementById("myLineChart1");
         ctx1.attr('width', container.width());
         ctx1.attr('height', 300);
