@@ -40,7 +40,10 @@
 .num_area{
     display: flex;
     flex-flow: column;
-    margin: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
     padding: 10px 50px 10px 50px;
     background-color: #b0c4de;
     width: auto;
