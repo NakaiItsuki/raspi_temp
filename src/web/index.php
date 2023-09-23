@@ -53,12 +53,18 @@ $json = json_encode($tempData);
 <h1>BME280 温度・湿度・気圧</h1>
 <div class="data_area" id="now_data">
     <h2>現在の情報</h2>
-    <h3>温度</h3>
-    <p class="data" id="d_temp"></p>
-    <h3>湿度</h3>
-    <p class="data" id="d_humi"></p>
-    <h3>気圧</h3>
-    <p class="data" id="d_pres"></p>
+    <div class="num_area">
+        <h3>温度</h3>
+        <p class="data" id="d_temp"></p>
+    </div>
+    <div class="num_area">
+        <h3>湿度</h3>
+        <p class="data" id="d_humi"></p>
+    </div>
+    <div class="num_area">
+        <h3>気圧</h3>
+        <p class="data" id="d_pres"></p>
+    </div>
 </div>
 
 <h2>温度グラフ</h2>

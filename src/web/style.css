@@ -26,3 +26,14 @@
     flex-wrap: wrap;
     background-color: #203864;
 }
+
+#now_data h3{
+    padding: 10px;
+    background-color: #ffffff;
+    color: black;
+}
+
+.num_area{
+    display: flex;
+    flex-flow: column;
+}
