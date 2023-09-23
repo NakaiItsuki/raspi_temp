@@ -12,6 +12,17 @@
     position: relative;
     width:  calc(100% - 40px);
     height: 300px;
-    overflow: hidden;
+    overflow: scroll;
     margin:20px;
+}
+
+.data_area{
+    margin: 10px;
+    width: auto;
+}
+
+#now_data{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #203864;
 }
