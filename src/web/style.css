@@ -44,3 +44,10 @@
     background-color: #b0c4de;
     width: auto;
 }
+.num_area p{
+    margin: 0px;
+}
+
+.num_data{
+    font-size: 40px;
+}

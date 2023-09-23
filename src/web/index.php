@@ -55,15 +55,15 @@ $json = json_encode($tempData);
 <div class="data_area" id="now_data">
     <div class="num_area">
         <h3>温度</h3>
-        <p class="data" id="d_temp"></p>
+        <p class="data"><span class="num_data" id="d_temp"></span>℃</p>
     </div>
     <div class="num_area">
         <h3>湿度</h3>
-        <p class="data" id="d_humi"></p>
+        <p class="data"><span class="num_data" id="d_humi"></span>%</p> 
     </div>
     <div class="num_area">
         <h3>気圧</h3>
-        <p class="data" id="d_pres"></p>
+        <p class="data"><span class="num_data" id="d_pres"></span>hPa</p>
     </div>
 </div>
 
