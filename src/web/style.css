@@ -11,7 +11,7 @@
 .canvas-container {
     position: relative;
     width:  calc(100% - 40px);
-    height: 300px;
+    height: 330px;
     overflow: scroll;
     margin:20px;
 }
@@ -36,4 +36,6 @@
 .num_area{
     display: flex;
     flex-flow: column;
+    margin: 20px;
+    border-radius: 5px;
 }
