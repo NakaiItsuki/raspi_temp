@@ -51,8 +51,8 @@ while($row=$sth->fetch(PDO::FETCH_ASSOC)){
 $json = json_encode($tempData);
 ?>
 <h1>BME280 温度・湿度・気圧</h1>
+<h2>現在の情報</h2>
 <div class="data_area" id="now_data">
-    <h2>現在の情報</h2>
     <div class="num_area">
         <h3>温度</h3>
         <p class="data" id="d_temp"></p>
