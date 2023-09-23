@@ -92,9 +92,10 @@ $json = json_encode($tempData);
             humis.push(elm['humi']);
             press.push(elm['pres']);
         })
-        console.log(dates);
-        console.log(dates[0]);
-        console.log(temps[0]);
+        temps.reverse();
+        dates.reverse();
+        humis.reverse();
+        press.reverse();
         $("#d_temp").append(temps[temps.length-1]);
         $("#d_humi").append(humis[humis.length-1]);
         $("#d_pres").append(press[press.length-1]);
