@@ -32,13 +32,14 @@
     padding: 10px;
     background-color: #ffffff;
     color: black;
-    border-radius: 10px;
+    border-radius: 5px;
+    border: 1px solid #000000;
 }
 
 .num_area{
     display: flex;
     flex-flow: column;
     margin: 20px;
-    padding: 30px 50px 30px 50px;
     background-color: #b0c4de;
+    width: auto;
 }
