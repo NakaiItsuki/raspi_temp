@@ -50,24 +50,24 @@ while($row=$sth->fetch(PDO::FETCH_ASSOC)){
 }
 $json = json_encode($tempData);
 ?>
-<h1>BME280 温度・湿度・気圧</h1>
+<h1>BME280 気温・湿度・気圧</h1>
 <h2>現在の情報</h2>
 <div class="data_area" id="now_data">
-    <div class="num_area">
-        <h3>温度</h3>
+    <div class="num_area" id="temp_area">
+        <h3>気温</h3>
         <p class="data"><span class="num_data" id="d_temp"></span> ℃</p>
     </div>
-    <div class="num_area">
+    <div class="num_area" id="humi_area">
         <h3>湿度</h3>
         <p class="data"><span class="num_data" id="d_humi"></span> %</p> 
     </div>
-    <div class="num_area">
+    <div class="num_area" id="pres_area">
         <h3>気圧</h3>
         <p class="data"><span class="num_data" id="d_pres"></span> hPa</p>
     </div>
 </div>
 
-<h2>温度グラフ</h2>
+<h2>気温グラフ</h2>
 <div class="canvas-container">
     <canvas id="myLineChart1"></canvas>
 </div>
@@ -115,9 +115,9 @@ $json = json_encode($tempData);
             labels: dates,
             datasets: [
                 {
-                label: '気温(度）',
+                label: '気温(℃）',
                 data: temps,
-                borderColor: "rgba(255,0,0,1)",
+                borderColor: "rgba(242,161,166,1)",
                 backgroundColor: "rgba(0,0,0,0)"
                 }
             ],
@@ -125,7 +125,7 @@ $json = json_encode($tempData);
             options: {
             title: {
                 display: true,
-                text: '室温'
+                text: '気温'
             },
             scales: {
                 yAxes: [{
@@ -147,9 +147,9 @@ $json = json_encode($tempData);
             labels: dates,
             datasets: [
                 {
-                label: '湿温(%）',
+                label: '湿度(%）',
                 data: humis,
-                borderColor: "rgba(0,255,0,1)",
+                borderColor: "rgba(57,188,221,1)",
                 backgroundColor: "rgba(0,0,0,0)"
                 }
             ],
@@ -181,7 +181,7 @@ $json = json_encode($tempData);
                 {
                 label: '気圧(hPa）',
                 data: press,
-                borderColor: "rgba(0,0,255,1)",
+                borderColor: "rgba(0,164,121,1)",
                 backgroundColor: "rgba(0,0,0,0)"
                 }
             ],
