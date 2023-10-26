@@ -101,13 +101,13 @@ $json = json_encode($tempData);
         $("#d_pres").append(press[press.length-1]);
         var container = $('.canvas-container');
         var ctx1= $('#myLineChart1');
-        ctx1.attr('width', container.width());
+        ctx1.attr('width', 1200);
         ctx1.attr('height', 300);
         var ctx2= $('#myLineChart2');
-        ctx2.attr('width', container.width());
+        ctx2.attr('width', 1200);
         ctx2.attr('height', 300);
         var ctx3= $('#myLineChart3');
-        ctx3.attr('width', container.width());
+        ctx3.attr('width', 1200);
         ctx3.attr('height', 300);
         var myLineChart1 = new Chart(ctx1, {
             type: 'line',
@@ -123,6 +123,7 @@ $json = json_encode($tempData);
             ],
             },
             options: {
+                responsive: false,
             title: {
                 display: true,
                 text: '気温'
@@ -155,6 +156,7 @@ $json = json_encode($tempData);
             ],
             },
             options: {
+                responsive: false,
             title: {
                 display: true,
                 text: '湿度'
@@ -187,6 +189,7 @@ $json = json_encode($tempData);
             ],
             },
             options: {
+                responsive: false,
             title: {
                 display: true,
                 text: '気圧'
