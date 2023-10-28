@@ -81,7 +81,7 @@ $json = json_encode($tempData);
 </div>
 <script>
     $(function(){
-        var array = <?php echo $json; ?>;
+        var array = <?php echo $json; ?>;//phpのmysqlから取得したデータをjavascriptの配列に格納
         var dates = [];
         var temps = [];
         var humis = [];
@@ -92,21 +92,16 @@ $json = json_encode($tempData);
             humis.push(elm['humi']);
             press.push(elm['pres']);
         })
-        temps.reverse();
-        dates.reverse();
-        humis.reverse();
-        press.reverse();
-        $("#d_temp").append(temps[temps.length-1]);
-        $("#d_humi").append(humis[humis.length-1]);
-        $("#d_pres").append(press[press.length-1]);
-        var container = $('.canvas-container');
-        var ctx1= $('#myLineChart1');
+        $("#d_temp").append(temps[0]);// 現在の気温をHTMLに出力
+        $("#d_humi").append(humis[0]);//現在の湿度をHTMLに出力
+        $("#d_pres").append(press[0]);//現在の気圧をHTMLに出力
+        var ctx1= $('#myLineChart1');//気温グラフを描画するcanvas
         ctx1.attr('width', 1200);
         ctx1.attr('height', 300);
-        var ctx2= $('#myLineChart2');
+        var ctx2= $('#myLineChart2');//湿度グラフを描画するcanvas
         ctx2.attr('width', 1200);
         ctx2.attr('height', 300);
-        var ctx3= $('#myLineChart3');
+        var ctx3= $('#myLineChart3');//気圧グラフを描画するcanvas
         ctx3.attr('width', 1200);
         ctx3.attr('height', 300);
         var myLineChart1 = new Chart(ctx1, {
